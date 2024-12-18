@@ -1,0 +1,48 @@
+section.hero {
+    height: 300px;
+    background-image: url("/assets/hero.jpg");
+    background-size: cover;
+    background-position: center;
+}
+
+section.product-list {
+    max-width: 1200px;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 2rem;
+    padding: 2rem;
+    margin: 0 auto;
+    margin-top: 2rem;
+}
+
+section.product-list a {
+    text-decoration: none;
+    color: inherit
+}
+
+section.product-list .product figure {}
+
+section.product-list .product figure img {
+    width: 100%;
+    border-radius: 0.5rem;
+    margin-bottom: 0.8rem
+}
+
+section.product-list .product figure figcaption {}
+
+section.product-list .product figure figcaption h2 {
+    font-size: 1.6rem;
+    margin: 0;
+}
+
+section.product-list .product figure figcaption h3 {
+    font-size: 1.2rem
+}
+
+section.product-list article.product button.add-cart {
+    border: none;
+    border-radius: 0.2rem;
+    padding: 0.4rem 0.8rem;
+    background-color: rgb(39, 71, 255);
+    color: white;
+}

@@ -1,0 +1,21 @@
+<main>
+  <section class="hero"></section>
+  <section class="product-list">
+    @for(product of products(); track product._id) {
+    <article class="product">
+      <a [routerLink]="['/products/', product._id]">
+        <figure>
+          <img [src]="product.image" [alt]="product.name" />
+          <figcaption>
+            <h2>{{ product.name }}</h2>
+            <h3>{{ product.price | currency }}</h3>
+          </figcaption>
+        </figure>
+      </a>
+      <button class="add-cart" (click)="addToCart(product)">
+        Agregar al carrito
+      </button>
+    </article>
+    }
+  </section>
+</main>

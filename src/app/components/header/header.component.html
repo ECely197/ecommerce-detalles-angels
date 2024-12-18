@@ -1,0 +1,15 @@
+<header>
+  <nav>
+    <a routerLink="/">Bit Shop</a>
+    <ul>
+      <li *ngIf="!isLogged()"><a routerLink="/register">Register</a></li>
+      <li *ngIf="!isLogged()"><a routerLink="/login">Login</a></li>
+      <li>
+        <button (click)="handleCartClick()">
+          Cart ({{ cart().size }})
+        </button>
+      </li>
+      <li *ngIf="isLogged()"><button (click)="logout()">Logout</button></li>
+    </ul>
+  </nav>
+</header>
