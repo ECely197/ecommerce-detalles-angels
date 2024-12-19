@@ -4,6 +4,7 @@ import { Observable, throwError } from 'rxjs';
 import { User, RegisterData, LoginResponse, RegisterResponse } from '../models/user.model'; 
 import { tap, catchError } from 'rxjs/operators';
 import { AuthService } from './auth.service';
+import { HttpErrorResponse } from '@angular/common/http';
 
 @Injectable({
   providedIn: 'root',
@@ -29,16 +30,16 @@ export class UserService {
     return this.http.post(`${this.apiUrl}/users/avatar/${userId}`, formData).pipe(
       catchError(this.handleError('Error al subir el avatar'))
     );
-  }
-  login(credentials: { email: string; password: string }): Observable<LoginResponse> {
-    return this.http.post<LoginResponse>(`${this.apiUrl}/auth/login`, credentials).pipe(
+  };
+  login(credentials: { }): Observable<LoginResponse> {
+    return this.http.post<LoginResponse>(`${this.apiUrl}/auth/login`, credentials,{}).pipe(
       tap((response: LoginResponse) => {
         if (response?.token) {
           this.authService.setToken(response.token);
         }
       }),
       catchError(this.handleError<LoginResponse>('Error al iniciar sesión'))
-    );
+  );
   }
 
   fetchUserProfile(userId: string): Observable<User> {
@@ -59,10 +60,28 @@ export class UserService {
   }
 
   private handleError<T>(defaultMessage: string) {
-    return (error: any): Observable<T> => {
-      const errorMessage = error.error?.message || defaultMessage;
-      console.error(defaultMessage, error);
-      return throwError(() => new Error(errorMessage));
+    return (error: HttpErrorResponse): Observable<T> => {
+      let errorMessage = defaultMessage;
+      // Manejo de diferentes formatos de error
+    if (error.error instanceof ErrorEvent) {
+      // Error del cliente
+      errorMessage = `Error del cliente: ${error.error.message}`;
+    } else if (error.error?.message) {
+      // Error del servidor con mensaje específico
+      errorMessage = error.error.message;
+    } else if (error.message) {
+      // Otro formato de error
+      errorMessage = error.message;
+    }
+
+    // Log detallado del error
+    console.error(`Error: ${defaultMessage}`, error);
+
+    // Retornar un observable que lanza el error con un mensaje amigable
+    return throwError(() => new Error(errorMessage));
+      // const errorMessage = error.error?.message || defaultMessage;
+      // console.error(defaultMessage, error);
+      // return throwError(() => new Error(errorMessage));
     };
   }
 }

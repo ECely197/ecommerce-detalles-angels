@@ -69,5 +69,7 @@ addReview(review: Review, token: string): Observable<Review> {
     })
   );
 }
-
+list() {
+  return this.http.get("http://localhost:3000/api/products")
+}
 }

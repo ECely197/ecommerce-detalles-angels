@@ -4,12 +4,14 @@ import { UserService } from '../../services/user.service';
 import { Router } from '@angular/router';
 import { HeaderComponent } from '../../components/header/header.component';
 import { AuthService } from '../../services/auth.service';
+import { LoginResponse } from '../../models/user.model';
+import { CommonModule } from '@angular/common';
 
 
 @Component({
   selector: 'app-login',
   standalone: true,
-  imports: [ReactiveFormsModule, HeaderComponent],
+  imports: [ReactiveFormsModule, HeaderComponent, CommonModule],
   templateUrl: './login.component.html',
   styleUrl: './login.component.css',
 })
@@ -28,8 +30,12 @@ export class LoginComponent {
   })
 
   onSubmit() {
+    const credentials = {
+      email: this.loginForm.value.email,
+      password: this.loginForm.value.password,
+    };
     if (this.loginForm.valid) {
-      this.userService.login(this.loginForm.value).subscribe({
+      this.userService.login(credentials).subscribe({
         next: (response: any) => {
           this.authService.setToken(response.token)
           this.router.navigate(["/ruta-privada"])

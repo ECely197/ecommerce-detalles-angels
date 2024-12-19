@@ -24,7 +24,7 @@ export class HeaderComponent {
   private cartService = inject(CartService);
   private router = inject(Router);
 
-  cart = this.cartService.products;
+  cart = this.cartService.productos;
 
   handleCartClick(): void {
     this.cartService.toggleCartVisibility();

@@ -2,7 +2,7 @@ import { CurrencyPipe } from '@angular/common';
 import { Component, Input, SimpleChanges, inject } from '@angular/core';
 import { FormControl, ReactiveFormsModule } from '@angular/forms';
 import { CartService } from '../../services/cart.service';
-import { Product } from '../../models/product.model';
+import { Producto } from '../../models/product.model';
 
 @Component({
   selector: 'cart-product',

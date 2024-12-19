@@ -1,13 +1,16 @@
-import { computed, Injectable, signal } from '@angular/core';
+import { computed, inject, Injectable, signal } from '@angular/core';
 import { Producto } from '../models/product.model';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 
 @Injectable({
   providedIn: 'root'
 })
 export class CartService {
+  constructor() {}
   private cartItems: { product: Producto; quantity: number }[] = [];
   productos = signal(new Map());
   cartVisibility = signal(false);
+  private http = inject(HttpClient)
 
   //visualizacion de carrito (codigo copiado)
   total = computed(() => {
@@ -26,14 +29,29 @@ export class CartService {
     this.cartVisibility.update((value) => !value);
   }
 
-  addToCart(product: Producto, quantity: number): void {
-    const existingItem = this.cartItems.find(item => item.product._id === product._id);
-    if (existingItem) {
-      existingItem.quantity += quantity;
-    } else {
-      this.cartItems.push({ product, quantity });
-    }
-    console.log('Product added to cart:', this.cartItems);
+  // addToCart(product: Producto, quantity: number): void {
+  //   const existingItem = this.cartItems.find(item => item.product._id === product._id);
+  //   if (existingItem) {
+  //     existingItem.quantity += quantity;
+  //   } else {
+  //     this.cartItems.push({ product, quantity });
+  //   }
+  //   console.log('Product added to cart:', this.cartItems);
+  // }
+  addToCart(product: Producto) {
+    this.productos.update((productosMap) => {
+      const productInCart = productosMap.get(product._id);
+      if (productInCart) {
+        productosMap.set(product._id, {
+          ...productInCart,
+          quantity: productInCart.quantity + 1,
+        });
+      } else {
+        productosMap.set(product._id, { ...product, quantity: 1 });
+      }
+
+      return new Map(productosMap);
+    });
   }
 
   getCartItems() {
@@ -80,36 +98,34 @@ export class CartService {
       return new Map(productosMap);
     });
   }
+  createOrder(formData: any) {
+    console.log('Create order');
+    console.log(formData);
+    console.log(this.productos().values());
+
+    const mapToArray = Array.from(this.productos().values());
+    const productosArray = mapToArray.map((producto) => {
+      return { productId: producto._id, quantity: producto.quantity };
+    });
+
+    console.log(productosArray);
+
+    return this.http.post(
+      'http://localhost:3000/api/orders',
+      {
+        products: productosArray,
+        total: this.total(),
+        dato1: formData.dato1,
+        dato2: formData.dato2,
+        dato3: formData.dato3,
+        paymentMethod: formData.paymentMethod,
+      },
+      {
+        headers: new HttpHeaders({
+          Authorization: `Bearer ${localStorage.getItem('user_token')}`, // Reemplaza 'tu_token_aqui' con el token real
+          'Content-Type': 'application/json',
+        }),
+      }
+    );
+  }
 }
-
-//   createOrder(formData: any) {
-//     console.log('Create order');
-//     console.log(formData);
-//     console.log(this.products().values());
-
-//     const mapToArray = Array.from(this.products().values());
-//     const productsArray = mapToArray.map((product) => {
-//       return { productId: product._id, quantity: product.quantity };
-//     });
-
-//     console.log(productsArray);
-
-//     return this.http.post(
-//       'http://localhost:3000/api/orders',
-//       {
-//         products: productsArray,
-//         total: this.total(),
-//         dato1: formData.dato1,
-//         dato2: formData.dato2,
-//         dato3: formData.dato3,
-//         paymentMethod: formData.paymentMethod,
-//       },
-//       {
-//         headers: new HttpHeaders({
-//           Authorization: `Bearer ${localStorage.getItem('user_token')}`, // Reemplaza 'tu_token_aqui' con el token real
-//           'Content-Type': 'application/json',
-//         }),
-//       }
-//     );
-//   }
-// }

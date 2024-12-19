@@ -1,7 +1,7 @@
 import { Component, inject, signal } from '@angular/core';
 import { HeaderComponent } from '../../components/header/header.component';
-import { Product } from '../../models/product.model';
-import { ProductService } from '../../services/product.service';
+import { Producto } from '../../models/product.model';
+import { ProductoService } from '../../services/product.service';
 import { RouterLinkWithHref } from '@angular/router';
 import { CartService } from '../../services/cart.service';
 import { CurrencyPipe } from '@angular/common';
@@ -14,10 +14,10 @@ import { CurrencyPipe } from '@angular/common';
   styleUrl: './home.component.css'
 })
 export class HomeComponent {
-  private productService = inject(ProductService)
+  private productService = inject(ProductoService)
   private cartService = inject(CartService)
 
-  products = signal<Product[]>([])
+  products = signal<Producto[]>([])
 
   ngOnInit() {
     this.productService.list()
