@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable, throwError } from 'rxjs';
 import { catchError, tap } from 'rxjs/operators';
-import { Producto, Review } from '../models/product.model';
+import { Producto} from '../models/product.model';
 
 @Injectable({
   providedIn: 'root'
@@ -43,32 +43,8 @@ export class ProductoService {
       );
   }
 
-  // Obtener reseñas por ID de producto
-  obtenerReviewsPorProductoId(productId: string): Observable<Review[]> {
-    return this.http.get<Review[]>(`${this.apiUrl}/reviews/products/${productId}`) // Verifica esta URL
-        .pipe(
-            catchError(error => {
-                console.error('Error al obtener reseñas:', error);
-                return throwError(error);
-            })
-        );
-}
+ 
 
-  
-  // Agregar una nueva reseña
-addReview(review: Review, token: string): Observable<Review> {
-  return this.http.post<Review>(`${this.apiUrl}/reviews`, review, {
-    headers: {
-      'Authorization': `Bearer ${token}`
-    }
-  })
-  .pipe(
-    catchError(error => {
-      console.error('Error al agregar la reseña:', error);
-      return throwError(error);
-    })
-  );
-}
 list() {
   return this.http.get("http://localhost:3000/api/products")
 }

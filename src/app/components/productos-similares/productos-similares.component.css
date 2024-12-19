@@ -1,0 +1,62 @@
+.productos-container {
+    display: flex;
+    flex-wrap: wrap; /* Permite que los elementos se muevan a la siguiente línea si no hay espacio */
+    justify-content: flex-start; /* Alinea las tarjetas a la izquierda sin espacio */
+    margin: 0; /* Elimina el margen superior e inferior de la sección */
+}
+
+.product-card {
+    flex: 1 1 calc(25% - 10px); /* Cada producto ocupará el 25% del ancho menos un margen */
+    background-color: #f9f9f9; /* Fondo gris claro para las tarjetas */
+    border-radius: 8px; /* Bordes redondeados suaves */
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15); /* Sombra más suave para un efecto elevado */
+    padding: 10px; /* Espaciado interno más amplio */
+    margin: 5px; /* Espaciado entre las tarjetas, ajustado para que sea más pequeño */
+    transition: transform 0.3s ease, box-shadow 0.3s ease; /* Transición suave para efectos */
+    text-align: center; /* Centra el contenido */
+    max-width: 150px; /* Establece un ancho máximo para los contenedores */
+    box-sizing: border-box; /* Incluye el padding y el border en el ancho total */
+}
+
+.product-card:hover {
+    transform: translateY(-5px); /* Efecto de elevación al pasar el ratón sobre el producto */
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.25); /* Sombra más intensa al pasar el ratón */
+}
+
+.product-card img {
+    max-width: 100%; /* La imagen no debe desbordarse del contenedor */
+    height: auto; /* Mantiene la proporción de la imagen */
+    margin-bottom: 5px; /* Espacio entre la imagen y el contenido de texto */
+}
+
+.product-card h3 {
+    font-size: 0.9rem; /* Tamaño de fuente del título más pequeño */
+    color: #333; /* Color del texto del título */
+    margin: 5px 0; /* Espacio arriba y abajo del título */
+    word-wrap: break-word; /* Permite que las palabras se dividan en múltiples líneas si es necesario */
+}
+
+.product-card p {
+    font-size: 0.8rem; /* Tamaño de fuente del texto más pequeño */
+    color: #666; /* Color del texto de la descripción */
+    margin: 5px 0; /* Espacio arriba y abajo de la descripción */
+    word-wrap: break-word; /* Permite que las palabras se dividan en múltiples líneas si es necesario */
+}
+
+.price {
+    font-size: 0.9rem; /* Tamaño de fuente del precio más pequeño */
+    font-weight: bold; /* Negrita para el precio */
+    color: #e91e63; /* Color llamativo para el precio */
+    margin-top: 5px; /* Espacio superior para separar del resto del texto */
+}
+@media (max-width: 768px) {
+    .product-card {
+        flex: 1 1 calc(50% - 10px); /* 50% en pantallas medianas */
+    }
+}
+
+@media (max-width: 480px) {
+    .product-card {
+        flex: 1 1 100%; /* 100% en pantallas pequeñas */
+    }
+}

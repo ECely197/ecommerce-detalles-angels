@@ -1,3 +1,5 @@
+
+
 export interface Producto {
     _id?: string;
     tipo: string
@@ -6,7 +8,7 @@ export interface Producto {
     images: string[];
     descripcionOne: string;
     descripcionTwo:string;
-    categoria:string;
+    categoriaId?: string;
     material?: string;
     dimensions?: string;
     stock?: number;
@@ -15,10 +17,5 @@ export interface Producto {
     fechaDeLanzamiento?: Date; // Nueva propiedad
   }
   
-  export interface Review {
-    nombreRevisor: string;
-    calificacion: number | null;
-    comentario: string;
-    productoId: string; // o puedes usar 'mongoose.Types.ObjectId' si estás usando Mongoose
-  }
+  
   

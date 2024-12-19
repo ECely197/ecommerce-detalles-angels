@@ -1,0 +1,15 @@
+<h1>Productos Destacados</h1>
+<div class="product-grid">
+  <div *ngFor="let producto of productsToShow" class="product-card">
+    <a [routerLink]="['/products', producto._id]">  <!-- Corrige aquí -->
+      <img *ngIf="producto.images.length > 0" [src]="producto.images[0]" alt="{{ producto.nombre }}">
+    </a>
+    <h3>{{ producto.nombre }}</h3>
+    <p>Precio: {{ producto.precio | currency }}</p>
+  </div>
+</div>
+
+<div class="navigation">
+  <button (click)="prevProduct()" [disabled]="currentStartIndex === 0">Anterior</button>
+  <button (click)="nextProduct()" [disabled]="currentStartIndex + 4 >= productosDestacados.length">Siguiente</button>
+</div>

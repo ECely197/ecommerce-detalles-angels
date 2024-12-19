@@ -6,7 +6,7 @@ import { PrivateExampleComponent } from './pages/private-example/private-example
 import { HomeComponent } from './pages/home/home.component';
 import { CheckoutComponent } from './pages/checkout/checkout.component';
 import { ThanksComponent } from './pages/thanks/thanks.component';
-import { DetailComponent } from './pages/detail/detail.component';
+import { ProductComponent } from './pages/producto/producto.component';
 import { isLoggedGuard } from './guards/is-logged.guard';
 
 export const routes: Routes = [
@@ -28,5 +28,5 @@ export const routes: Routes = [
     canActivate: [isLoggedGuard],
   },
   { path: 'thanks', component: ThanksComponent },
-  { path: 'products/:productId', component: DetailComponent },
+  { path: 'products/:id', component: ProductComponent },
 ];
