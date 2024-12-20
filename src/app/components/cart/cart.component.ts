@@ -2,6 +2,7 @@ import { Component, Input, inject, Signal, signal, computed } from '@angular/cor
 import { CommonModule, CurrencyPipe } from '@angular/common';
 import { CartService } from '../../services/cart.service';
 import { CartProductComponent } from '../cart-product/cart-product.component';
+import { RouterModule } from '@angular/router';
 
 @Component({
   selector: 'app-cart',
@@ -9,7 +10,8 @@ import { CartProductComponent } from '../cart-product/cart-product.component';
   imports: [
     CurrencyPipe,
     CartProductComponent,
-    CommonModule
+    CommonModule,
+    RouterModule
   ],
   templateUrl: './cart.component.html',
   styleUrl: './cart.component.css',

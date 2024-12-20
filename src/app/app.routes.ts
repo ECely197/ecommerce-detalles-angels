@@ -14,6 +14,7 @@ import { isLoggedGuard } from './guards/is-logged.guard';
 export const routes: Routes = [
   { path: '', component: HomeComponent },
   { path: 'login', component: LoginComponent, canActivate: [redirectIfLogged] },
+  { path: 'checkout', component: CheckoutComponent},
   {
     path: 'register',
     component: RegisterComponent,
