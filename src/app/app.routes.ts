@@ -13,6 +13,7 @@ import {} from './pages/checkout/checkout.component';
 export const routes: Routes = [
   { path: '', component: HomeComponent },
   { path: 'login', component: LoginComponent, canActivate: [redirectIfLogged] },
+  { path: 'checkout', component: CheckoutComponent},
   {
     path: 'register',
     component: RegisterComponent,
