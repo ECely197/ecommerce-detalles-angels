@@ -7,95 +7,143 @@ describe('ProductoService', () => {
   let service: ProductoService;
   let httpMock: HttpTestingController;
 
+  const mockProductos: Producto[] = [
+    {
+      _id: '1',
+      tipo:"cabeza",
+      nombre: 'Producto 1',
+      precio: 100,
+      images: ['img1.jpg'],
+      descripcionOne: 'Descripción 1',
+      descripcionTwo: 'Descripción 2',
+      categoriaId: 'cat1',
+      stock: 10,
+      shippingTime: '1-2 días',
+      marca: 'Marca 1',
+      fechaDeLanzamiento: new Date(),
+    },
+    {
+      _id: '2',
+      tipo:"pierna",
+      nombre: 'Producto 2',
+      precio: 200,
+      images: ['img2.jpg'],
+      descripcionOne: 'Descripción 1',
+      descripcionTwo: 'Descripción 2',
+      categoriaId: 'cat2',
+      stock: 20,
+      shippingTime: '3-4 días',
+      marca: 'Marca 2',
+      fechaDeLanzamiento: new Date(),
+    }
+  ];
+
+  const mockProducto: Producto = {
+    _id: '1',
+    tipo: "brazo",
+    nombre: 'Producto 1',
+    precio: 100,
+    images: ['img1.jpg'],
+    descripcionOne: 'Descripción 1',
+    descripcionTwo: 'Descripción 2',
+    categoriaId: 'cat1',
+    stock: 10,
+    shippingTime: '1-2 días',
+    marca: 'Marca 1',
+    fechaDeLanzamiento: new Date(),
+  };
+
   beforeEach(() => {
     TestBed.configureTestingModule({
       imports: [HttpClientTestingModule],
-      providers: [ProductoService]
+      providers: [ProductoService],
     });
     service = TestBed.inject(ProductoService);
     httpMock = TestBed.inject(HttpTestingController);
   });
 
   afterEach(() => {
-    httpMock.verify();
-  });
-
-  it('should be created', () => {
-    expect(service).toBeTruthy();
+    httpMock.verify(); // Asegura que no haya solicitudes HTTP pendientes
   });
 
   it('debería obtener todos los productos', () => {
-    const mockProductos: Producto[] = [
-      { _id: '1', tipo: 'Tipo 1', nombre: 'Producto 1', precio: 100, images: ['image1.jpg'], descripcionOne: 'Descripción 1.1', descripcionTwo: 'Descripción 1.2', categoriaId: '1', stock: 10 },
-      { _id: '2', tipo: 'Tipo 2', nombre: 'Producto 2', precio: 200, images: ['image2.jpg'], descripcionOne: 'Descripción 2.1', descripcionTwo: 'Descripción 2.2', categoriaId: '2', stock: 20 }
-    ];
-
-    service.obtenerProductos().subscribe((productos: Producto[]) => {
+    service.obtenerProductos().subscribe((productos) => {
       expect(productos.length).toBe(2);
       expect(productos).toEqual(mockProductos);
     });
 
     const req = httpMock.expectOne('http://localhost:3000/api/products');
     expect(req.request.method).toBe('GET');
-    req.flush(mockProductos);
+    req.flush(mockProductos); // Simula la respuesta exitosa del servidor
   });
 
   it('debería obtener un producto por su ID', () => {
-    const mockProducto: Producto = { _id: '1', tipo: 'Tipo 1', nombre: 'Producto 1', precio: 100, images: ['image1.jpg'], descripcionOne: 'Descripción 1.1', descripcionTwo: 'Descripción 1.2', categoriaId: '1', stock: 10 };
-
-    service.obtenerProductoPorId('1').subscribe((producto: Producto) => {
+    const productoId = '1';
+    service.obtenerProductoPorId(productoId).subscribe((producto) => {
       expect(producto).toEqual(mockProducto);
     });
 
-    const req = httpMock.expectOne('http://localhost:3000/api/products/1');
+    const req = httpMock.expectOne(`http://localhost:3000/api/products/${productoId}`);
     expect(req.request.method).toBe('GET');
-    req.flush(mockProducto);
+    req.flush(mockProducto); // Simula la respuesta exitosa del servidor
   });
 
   it('debería obtener productos por categoría', () => {
-    const mockProductos: Producto[] = [
-      { _id: '1', tipo: 'Tipo 1', nombre: 'Producto 1', precio: 100, images: ['image1.jpg'], descripcionOne: 'Descripción 1.1', descripcionTwo: 'Descripción 1.2', categoriaId: '1', stock: 10 },
-      { _id: '2', tipo: 'Tipo 2', nombre: 'Producto 2', precio: 200, images: ['image2.jpg'], descripcionOne: 'Descripción 2.1', descripcionTwo: 'Descripción 2.2', categoriaId: '1', stock: 20 }
-    ];
-
-    service.obtenerProductosPorCategoria('1').subscribe((productos: Producto[]) => {
+    const categoriaId = 'cat1';
+    service.obtenerProductosPorCategoria(categoriaId).subscribe((productos) => {
       expect(productos.length).toBe(2);
       expect(productos).toEqual(mockProductos);
     });
 
-    const req = httpMock.expectOne('http://localhost:3000/api/products/categoria/1');
+    const req = httpMock.expectOne(`http://localhost:3000/api/products/categoria/${categoriaId}`);
     expect(req.request.method).toBe('GET');
-    req.flush(mockProductos);
+    req.flush(mockProductos); // Simula la respuesta exitosa del servidor
   });
 
-  it('debería manejar errores correctamente', () => {
+  it('debería manejar un error al obtener todos los productos', () => {
     const errorMessage = 'Error al obtener productos';
 
-    service.obtenerProductos().subscribe(
-      () => fail('Debería haber fallado con el error 500'),
-      (error: any) => {
-        expect(error).toBeTruthy();
+    service.obtenerProductos().subscribe({
+      next: () => fail('Se esperaba un error'),
+      error: (error) => {
+        expect(error.status).toBe(500);
+        expect(error.error).toBe(errorMessage);
       }
-    );
-
-    const req = httpMock.expectOne('http://localhost:3000/api/products');
-    expect(req.request.method).toBe('GET');
-    req.flush({ message: errorMessage }, { status: 500, statusText: 'Server Error' });
-  });
-
-  it('debería listar productos', () => {
-    const mockProductos: Producto[] = [
-      { _id: '1', tipo: 'Tipo 1', nombre: 'Producto 1', precio: 100, images: ['image1.jpg'], descripcionOne: 'Descripción 1.1', descripcionTwo: 'Descripción 1.2', categoriaId: '1', stock: 10 },
-      { _id: '2', tipo: 'Tipo 2', nombre: 'Producto 2', precio: 200, images: ['image2.jpg'], descripcionOne: 'Descripción 2.1', descripcionTwo: 'Descripción 2.2', categoriaId: '2', stock: 20 }
-    ];
-
-    service.list().subscribe((productos: Producto[] | any) => {
-      expect(productos.length).toBe(2);
-      expect(productos).toEqual(mockProductos);
     });
 
     const req = httpMock.expectOne('http://localhost:3000/api/products');
-    expect(req.request.method).toBe('GET');
-    req.flush(mockProductos);
+    req.flush(errorMessage, { status: 500, statusText: 'Internal Server Error' }); // Simula el error 500
+  });
+
+  it('debería manejar un error al obtener un producto por su ID', () => {
+    const productoId = '1';
+    const errorMessage = 'Producto no encontrado';
+
+    service.obtenerProductoPorId(productoId).subscribe({
+      next: () => fail('Se esperaba un error'),
+      error: (error) => {
+        expect(error.status).toBe(404);
+        expect(error.error).toBe(errorMessage);
+      }
+    });
+
+    const req = httpMock.expectOne(`http://localhost:3000/api/products/${productoId}`);
+    req.flush(errorMessage, { status: 404, statusText: 'Not Found' }); // Simula el error 404
+  });
+
+  it('debería manejar un error al obtener productos por categoría', () => {
+    const categoriaId = 'cat1';
+    const errorMessage = 'Error al obtener productos por categoría';
+
+    service.obtenerProductosPorCategoria(categoriaId).subscribe({
+      next: () => fail('Se esperaba un error'),
+      error: (error) => {
+        expect(error.status).toBe(500);
+        expect(error.error).toBe(errorMessage);
+      }
+    });
+
+    const req = httpMock.expectOne(`http://localhost:3000/api/products/categoria/${categoriaId}`);
+    req.flush(errorMessage, { status: 500, statusText: 'Internal Server Error' }); // Simula el error 500
   });
 });
