@@ -2,7 +2,6 @@ import { CurrencyPipe } from '@angular/common';
 import { Component, Input, SimpleChanges, inject } from '@angular/core';
 import { FormControl, ReactiveFormsModule } from '@angular/forms';
 import { CartService } from '../../services/cart.service';
-import { Producto } from '../../models/product.model';
 
 @Component({
   selector: 'cart-product',
@@ -12,7 +11,7 @@ import { Producto } from '../../models/product.model';
   styleUrls: ['./cart-product.component.css']
 })
 export class CartProductComponent {
-  private cartService = inject(CartService)
+  private cartService = inject(CartService);
   @Input() product: any;
 
   productQuantity = new FormControl(0);
@@ -27,14 +26,14 @@ export class CartProductComponent {
   }
 
   increment(productId: string) {
-    this.cartService.incrementQuantity(productId)
+    this.cartService.incrementQuantity(productId);
   }
 
   decrement(productId: string) {
-    this.cartService.decrementQuantity(productId)
+    this.cartService.decrementQuantity(productId);
   }
 
   delete(productId: string) {
-    this.cartService.deleteProduct(productId)
+    this.cartService.deleteProduct(productId);
   }
 }

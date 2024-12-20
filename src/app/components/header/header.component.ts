@@ -21,7 +21,7 @@ export class HeaderComponent implements OnInit {
   private cartService = inject(CartService);
   private router = inject(Router);
 
-  cart = this.cartService.productos;
+  cart = this.cartService.products;
   menuVisible = false;
   userProfile: User | null = null;
 

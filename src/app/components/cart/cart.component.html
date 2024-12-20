@@ -1,5 +1,4 @@
 <aside [ngClass]="cartVisibility() ? 'cart show' : 'cart'">
-  <!-- Mostramos el número total de items usando totalQuantity() -->
   <h2>Carrito ({{ totalQuantity() }})</h2>
   <button class="close" (click)="handleCartClick()">Close</button>
   <section class="cart-products">
@@ -9,7 +8,6 @@
     </cart-product>
   </section>
   <div class="details">
-    <!-- Mostramos el total del precio usando totalPrice() -->
     <h3>
       Total <span>{{ totalPrice() | currency }}</span>
     </h3>

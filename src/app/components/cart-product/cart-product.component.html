@@ -1,6 +1,5 @@
 <article class="product">
   <figure>
-    <!-- Ajustamos para usar la primera imagen del array y el nombre y precio del producto -->
     <img [src]="product.images[0]" alt="{{product.nombre}}" />
     <figcaption>
       <p>{{ product.nombre }}</p>
@@ -16,6 +15,7 @@
         name="quantity"
         id="quantity"
         [formControl]="productQuantity"
+        readonly
       />
       <button type="button" class="increment" (click)="increment(product._id)">+</button>
     </form>
