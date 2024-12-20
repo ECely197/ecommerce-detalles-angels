@@ -1,51 +1,71 @@
-import { Component, inject } from '@angular/core';
-import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
-import { UserService } from '../../services/user.service';
-import { Router } from '@angular/router';
-import { HeaderComponent } from '../../components/header/header.component';
+import { Component } from '@angular/core';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { AuthService } from '../../services/auth.service';
-import { LoginResponse } from '../../models/user.model';
+import { Router } from '@angular/router';
 import { CommonModule } from '@angular/common';
-
+import { ReactiveFormsModule } from '@angular/forms';
+import { RouterModule } from '@angular/router';
+import { Subscription } from 'rxjs';
 
 @Component({
-  selector: 'app-login',
   standalone: true,
-  imports: [ReactiveFormsModule, HeaderComponent, CommonModule],
+  selector: 'app-login',
   templateUrl: './login.component.html',
-  styleUrl: './login.component.css',
+  styleUrls: ['./login.component.css'],
+  imports: [CommonModule, ReactiveFormsModule, RouterModule]
 })
 export class LoginComponent {
-  private router = inject(Router)
-  private userService = inject(UserService)
-  private authService = inject(AuthService)
+  loginForm: FormGroup;
+  errorMessage: string = '';
+  showPassword: boolean = false;
+  private loginSubscription: Subscription | undefined; // Subscription to cleanup
 
-  loginForm = new FormGroup({
-    email: new FormControl("", {
-      validators: [Validators.required]
-    }),
-    password: new FormControl("", {
-      validators: [Validators.required]
-    })
-  })
+  constructor(private fb: FormBuilder, private authService: AuthService, private router: Router) {
+    this.loginForm = this.fb.group({
+      email: ['', [Validators.required, Validators.email]],
+      password: ['', [Validators.required, Validators.minLength(6)]]
+    });
+  }
 
+  
   onSubmit() {
-    const credentials = {
-      email: this.loginForm.value.email,
-      password: this.loginForm.value.password,
-    };
     if (this.loginForm.valid) {
-      this.userService.login(credentials).subscribe({
-        next: (response: any) => {
-          this.authService.setToken(response.token)
-          this.router.navigate(["/ruta-privada"])
+      const { email, password } = this.loginForm.value;
+  
+      if (this.loginSubscription) {
+        this.loginSubscription.unsubscribe(); // Cleanup previous subscription
+      }
+  
+      this.loginSubscription = this.authService.login(email, password).subscribe({
+        next: (response) => {
+          if (response.token) {
+            localStorage.setItem('token', response.token);
+            this.loginForm.reset(); // Reset form on success
+            this.router.navigate(['/']); // Redirect to main page
+          }
         },
-        error: error => {
-          console.log(error)
+        error: (error) => {
+          console.error('Error al iniciar sesión:', error);
+          // Imprimir más detalles del error
+          console.error('Detalles del error 500:', error); 
+          if (error.status === 500) {
+            this.errorMessage = 'Error del servidor. Por favor, intenta más tarde.';
+          } else {
+            this.errorMessage = 'Ocurrió un error inesperado. Por favor, intenta más tarde.';
+          }
         }
-      })
-    } else {
-      console.log("Campos no validos")
+      });
+    }
+  }
+  
+
+  togglePasswordVisibility() {
+    this.showPassword = !this.showPassword;
+  }
+
+  ngOnDestroy() {
+    if (this.loginSubscription) {
+      this.loginSubscription.unsubscribe(); // Cleanup on component destroy
     }
   }
 }
