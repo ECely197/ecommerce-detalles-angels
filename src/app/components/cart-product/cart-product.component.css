@@ -25,10 +25,6 @@
     flex-grow: 1;
 }
 
-.product figure figcaption h3 {}
-
-.product figure figcaption {}
-
 .product .actions {
     height: 100%;
     position: absolute;
@@ -52,10 +48,8 @@ input::-webkit-inner-spin-button {
     margin: 0;
 }
 
-
 .product .actions form input {
     width: 2rem;
-
     text-align: center;
 }
 
