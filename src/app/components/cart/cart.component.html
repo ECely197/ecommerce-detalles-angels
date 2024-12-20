@@ -1,18 +1,15 @@
 <aside [ngClass]="cartVisibility() ? 'cart show' : 'cart'">
-  <!-- Mostramos el número total de items usando totalQuantity() -->
-  <h2>Carrito ({{ totalQuantity() }})</h2>
+  <h2>Carrito ({{ cart().size }})</h2>
   <button class="close" (click)="handleCartClick()">Close</button>
   <section class="cart-products">
-    <cart-product 
-      *ngFor="let product of cartProducts()" 
-      [product]="product">
-    </cart-product>
+    @for(product of cart().values(); track product._id) {
+    <cart-product [product]="product" />
+    }
   </section>
   <div class="details">
-    <!-- Mostramos el total del precio usando totalPrice() -->
     <h3>
       Total <span>{{ totalPrice() | currency }}</span>
     </h3>
-    <a href="" class="checkout">Checkout</a>
+    <a routerLink="/checkout" class="checkout">Checkout</a>
   </div>
 </aside>
