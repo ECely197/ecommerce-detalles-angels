@@ -1,5 +1,5 @@
 <div *ngIf="productosSimilares.length > 0">
-  <h2>Productos Similares</h2>
+  <h2 class="center">Productos Similares</h2>
   <div class="productos-container">
     <div *ngFor="let producto of productosSimilares | slice:0:3" class="product-card" (click)="navegarAlProducto(producto._id ?? '')">
       <img *ngIf="producto.images.length > 0" [src]="producto.images[0]" alt="{{ producto.nombre }}">

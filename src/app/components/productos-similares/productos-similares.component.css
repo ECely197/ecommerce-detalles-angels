@@ -49,6 +49,10 @@
     color: #e91e63; /* Color llamativo para el precio */
     margin-top: 5px; /* Espacio superior para separar del resto del texto */
 }
+
+.center{
+    text-align: center;
+}
 @media (max-width: 768px) {
     .product-card {
         flex: 1 1 calc(50% - 10px); /* 50% en pantallas medianas */

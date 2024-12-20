@@ -27,14 +27,15 @@ export class LoginComponent {
     });
   }
 
+  
   onSubmit() {
     if (this.loginForm.valid) {
       const { email, password } = this.loginForm.value;
-
+  
       if (this.loginSubscription) {
         this.loginSubscription.unsubscribe(); // Cleanup previous subscription
       }
-
+  
       this.loginSubscription = this.authService.login(email, password).subscribe({
         next: (response) => {
           if (response.token) {
@@ -45,9 +46,9 @@ export class LoginComponent {
         },
         error: (error) => {
           console.error('Error al iniciar sesión:', error);
-          if (error.status === 401) {
-            this.errorMessage = 'Credenciales incorrectas. Por favor, inténtalo de nuevo.';
-          } else if (error.status === 500) {
+          // Imprimir más detalles del error
+          console.error('Detalles del error 500:', error); 
+          if (error.status === 500) {
             this.errorMessage = 'Error del servidor. Por favor, intenta más tarde.';
           } else {
             this.errorMessage = 'Ocurrió un error inesperado. Por favor, intenta más tarde.';
@@ -56,6 +57,7 @@ export class LoginComponent {
       });
     }
   }
+  
 
   togglePasswordVisibility() {
     this.showPassword = !this.showPassword;
