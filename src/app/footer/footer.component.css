@@ -1,0 +1,107 @@
+footer {
+  margin-top: auto;
+}
+
+footer.footer a {
+  text-decoration: none;
+  color: aliceblue;
+}
+footer.footer ul {
+  list-style-type: none;
+}
+footer.footer ul li {
+  margin-top: 5px;
+}
+
+.footer-inner {
+  padding: 60px;
+  background-color: #000000;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.footer__location-title {
+  font-size: 2em;
+  margin-bottom: 10px;
+  color: aliceblue;
+}
+
+div.footer-content {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.footer__store-location {
+  grid-area: footer-map;
+}
+
+.footer-menu {
+  display: grid;
+  grid-template-areas: "left rigth";
+  grid-area: footer-menu;
+  gap: 10%;
+  align-content: space-between;
+}
+
+.footer__socia-icons {
+  display: flex;
+  gap: 10px;
+}
+
+.footer__menu-left {
+  grid-area: left;
+  display: grid;
+  grid-template-areas:
+    "menu1"
+    "hours"
+    "social";
+  gap: 50px;
+  color: aliceblue;
+}
+
+.footer__menu-rigth {
+  grid-area: rigth;
+  display: grid;
+  grid-template-areas:
+    "menu2"
+    "service";
+  gap: 50px;
+  color: aliceblue;
+}
+
+.footer__socia-icons img {
+  width: 20px;
+  height: 20px;
+  filter: invert(1);
+  margin-top: 10px;
+}
+
+@media (max-width: 1440px) {
+  iframe {
+    width: 350px;
+    height: 250px;
+  }
+}
+
+@media (max-width: 856px) {
+  .footer-content {
+    display: flex;
+    flex-direction: column;
+    gap: 10%;
+    align-content: space-between;
+  }
+
+  .footer-inner {
+    padding: 20px 0 20px 0;
+  }
+
+  .footer__store-location {
+    margin-top: 50px;
+  }
+
+  iframe {
+    width: 350px;
+    height: 250px;
+  }
+}

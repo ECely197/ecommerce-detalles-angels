@@ -20,7 +20,6 @@ export class CartComponent {
   private cartService = inject(CartService);
 
   cart = this.cartService.productos;
-  totalPrice = this.cartService.total;
   cartVisibility = this.cartService.cartVisibility;
 
   // Convertimos los valores del Map en un array de productos.

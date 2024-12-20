@@ -3,11 +3,12 @@ import { RouterOutlet } from '@angular/router';
 import { HeaderComponent } from './components/header/header.component';
 import { CartComponent } from './components/cart/cart.component';
 import { ProductosSimilaresComponent } from "./components/productos-similares/productos-similares.component";
+import { FooterComponent } from './footer/footer.component';
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [RouterOutlet, HeaderComponent, CartComponent, ProductosSimilaresComponent],
+  imports: [RouterOutlet, HeaderComponent, CartComponent, ProductosSimilaresComponent, FooterComponent, ProductosSimilaresComponent],
   templateUrl: './app.component.html',
   styleUrl: './app.component.css',
 })

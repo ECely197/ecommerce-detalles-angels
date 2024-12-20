@@ -122,7 +122,7 @@ export class CartService {
       },
       {
         headers: new HttpHeaders({
-          Authorization: `Bearer ${localStorage.getItem('user_token')}`, // Reemplaza 'tu_token_aqui' con el token real
+          Authorization: `Bearer ${localStorage.getItem('user_token')}`,
           'Content-Type': 'application/json',
         }),
       }
