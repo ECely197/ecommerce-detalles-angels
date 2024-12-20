@@ -17,7 +17,7 @@ export class CheckoutComponent {
   private cartService = inject(CartService)
   private router = inject(Router)
 
-  products = this.cartService.products
+  products = this.cartService.productos
 
   paymentDetails = new FormGroup({
     dato1: new FormControl(""),

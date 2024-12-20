@@ -1,0 +1,133 @@
+.product-section {
+  padding: 20px;
+}
+
+.section-title {
+  text-align: center;
+  font-size: 28px; /* Título más grande */
+  margin-bottom: 30px; /* Espacio debajo del título */
+  color: #333; /* Color del texto */
+}
+
+.product-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr); /* Cuatro columnas en pantallas grandes */
+  gap: 20px; /* Espacio entre los productos */
+  transition: all 0.3s ease; /* Suaviza la transición de los cambios */
+}
+
+.product-card {
+  background-color: #ffffff; /* Fondo blanco para las tarjetas */
+  border: 1px solid #e0e0e0; /* Borde gris claro */
+  border-radius: 10px; /* Bordes redondeados */
+  padding: 15px; /* Espacio interno */
+  text-align: center; /* Centrar texto */
+  transition: transform 0.3s ease, box-shadow 0.3s ease; /* Suave al interactuar */
+  overflow: hidden; /* Evitar desbordamiento */
+  box-shadow: 0 2px 15px rgba(0, 0, 0, 0.1); /* Sombra sutil */
+}
+
+.product-card:hover {
+  transform: translateY(-5px); /* Elevar la tarjeta al pasar el ratón */
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15); /* Sombra más intensa */
+}
+
+.product-card img {
+  max-width: 100%; /* Imagen no se desborda */
+  height: 120px; /* Altura fija para consistencia */
+  object-fit: cover; /* Mantiene el aspecto sin distorsionar */
+  border-radius: 10px; /* Bordes redondeados para la imagen */
+  transition: transform 0.3s ease; /* Suaviza la transformación de la imagen */
+}
+
+.product-card img:hover {
+  transform: scale(1.1); /* Efecto de zoom suave al pasar el ratón sobre la imagen */
+}
+
+.product-card h3 {
+  font-size: 20px; /* Tamaño del título del producto */
+  margin: 10px 0; /* Espacio arriba y abajo del título */
+  color: #007bff; /* Color azul para el título */
+}
+
+.product-card p {
+  font-size: 16px; /* Tamaño del texto del precio */
+  color: #555; /* Color gris para el precio */
+}
+
+.navigation {
+  margin-top: 30px; /* Espacio arriba de los botones */
+  display: flex;
+  justify-content: center; /* Centrar los botones */
+  gap: 20px; /* Espacio entre botones */
+}
+
+button {
+  background-color: #007bff; /* Color de fondo del botón */
+  color: white; /* Color del texto */
+  border: none; /* Sin borde */
+  border-radius: 5px; /* Bordes redondeados */
+  padding: 10px 20px; /* Espaciado interno */
+  cursor: pointer; /* Cursor en forma de puntero */
+  transition: background-color 0.3s ease, transform 0.3s ease; /* Transición suave */
+}
+
+button:hover {
+  background-color: #0056b3; /* Color más oscuro al pasar el ratón */
+  transform: scale(1.05); /* Efecto de aumento al pasar el ratón */
+}
+
+/* Animaciones para la transición entre productos */
+.fade-out {
+  animation: fadeOut 0.3s forwards; /* Duración de la animación */
+}
+
+@keyframes fadeOut {
+  from {
+    opacity: 1;
+  }
+  to {
+    opacity: 0;
+  }
+}
+
+.fade-in {
+  animation: fadeIn 0.3s forwards; /* Duración de la animación */
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+/* Estilo para pantallas pequeñas */
+@media (max-width: 768px) {
+  .product-grid {
+    display: flex; /* Usar flexbox para centrar el producto */
+    justify-content: center; /* Centrar horizontalmente */
+    margin: 10px 0; /* Margen arriba y abajo */
+  }
+
+  .product-card {
+    width: 60%; /* Ancho completo en dispositivos móviles */
+    max-width: 400px; /* Puedes ajustar este valor según tu diseño */
+    margin: 0 auto; /* Centrar la tarjeta */
+  }
+
+  .section-title {
+    font-size: 24px; /* Ajustar el tamaño del título para dispositivos móviles */
+  }
+
+  button {
+    width: 30%; /* Botones ocupan el ancho completo en dispositivos móviles */
+    padding: 10px; /* Espaciado interno */
+  }
+
+  .navigation {
+    gap: 20px; /* Espacio entre botones */
+  }
+}

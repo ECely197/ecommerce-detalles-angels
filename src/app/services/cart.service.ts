@@ -1,20 +1,20 @@
-import { computed, Injectable, inject, signal } from '@angular/core';
-import { Product } from '../models/product.model';
-import { CartProduct } from '../models/cart-product.model';
+import { computed, inject, Injectable, signal } from '@angular/core';
+import { Producto } from '../models/product.model';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 
 @Injectable({
-  providedIn: 'root',
+  providedIn: 'root'
 })
 export class CartService {
   constructor() {}
-
-  private http = inject(HttpClient);
-  products = signal(new Map());
+  private cartItems: { product: Producto; quantity: number }[] = [];
+  productos = signal(new Map());
   cartVisibility = signal(false);
+  private http = inject(HttpClient)
 
+  //visualizacion de carrito (codigo copiado)
   total = computed(() => {
-    const productsMap = this.products();
+    const productsMap = this.productos();
     let total = 0;
 
     productsMap.forEach((product) => {
@@ -23,81 +23,97 @@ export class CartService {
 
     return total;
   });
-
+  //****************************
+  
   toggleCartVisibility() {
     this.cartVisibility.update((value) => !value);
   }
 
-  addToCart(product: Product) {
-    this.products.update((productsMap) => {
-      const productInCart = productsMap.get(product._id);
+  // addToCart(product: Producto, quantity: number): void {
+  //   const existingItem = this.cartItems.find(item => item.product._id === product._id);
+  //   if (existingItem) {
+  //     existingItem.quantity += quantity;
+  //   } else {
+  //     this.cartItems.push({ product, quantity });
+  //   }
+  //   console.log('Product added to cart:', this.cartItems);
+  // }
+  addToCart(product: Producto) {
+    this.productos.update((productosMap) => {
+      const productInCart = productosMap.get(product._id);
       if (productInCart) {
-        productsMap.set(product._id, {
+        productosMap.set(product._id, {
           ...productInCart,
           quantity: productInCart.quantity + 1,
         });
       } else {
-        productsMap.set(product._id, { ...product, quantity: 1 });
+        productosMap.set(product._id, { ...product, quantity: 1 });
       }
 
-      return new Map(productsMap);
+      return new Map(productosMap);
     });
   }
 
+  getCartItems() {
+    return this.cartItems;
+  }
+
+  clearCart() {
+    this.cartItems = [];
+  }
   incrementQuantity(productId: string) {
-    this.products.update((productsMap) => {
-      const productInCart = productsMap.get(productId);
+    this.productos.update((productosMap) => {
+      const productInCart = productosMap.get(productId);
 
       if (productInCart) {
-        productsMap.set(productId, {
+        productosMap.set(productId, {
           ...productInCart,
           quantity: productInCart.quantity + 1,
         });
       }
 
-      return new Map(productsMap);
+      return new Map(productosMap);
     });
   }
 
   decrementQuantity(productId: string) {
-    this.products.update((productsMap) => {
-      const productInCart = productsMap.get(productId);
+    this.productos.update((productosMap) => {
+      const productInCart = productosMap.get(productId);
       if (productInCart!.quantity === 1) {
-        productsMap.delete(productId);
+        productosMap.delete(productId);
       } else {
-        productsMap.set(productId, {
+        productosMap.set(productId, {
           ...productInCart!,
           quantity: productInCart!.quantity - 1,
         });
       }
 
-      return new Map(productsMap);
+      return new Map(productosMap);
     });
   }
 
   deleteProduct(productId: string) {
-    this.products.update((productsMap) => {
-      productsMap.delete(productId);
-      return new Map(productsMap);
+    this.productos.update((productosMap) => {
+      productosMap.delete(productId);
+      return new Map(productosMap);
     });
   }
-
   createOrder(formData: any) {
     console.log('Create order');
     console.log(formData);
-    console.log(this.products().values());
+    console.log(this.productos().values());
 
-    const mapToArray = Array.from(this.products().values());
-    const productsArray = mapToArray.map((product) => {
-      return { productId: product._id, quantity: product.quantity };
+    const mapToArray = Array.from(this.productos().values());
+    const productosArray = mapToArray.map((producto) => {
+      return { productId: producto._id, quantity: producto.quantity };
     });
 
-    console.log(productsArray);
+    console.log(productosArray);
 
     return this.http.post(
       'http://localhost:3000/api/orders',
       {
-        products: productsArray,
+        products: productosArray,
         total: this.total(),
         dato1: formData.dato1,
         dato2: formData.dato2,

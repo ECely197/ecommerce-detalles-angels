@@ -19,8 +19,8 @@ import { RouterLinkWithHref } from '@angular/router';
 export class CartComponent {
   private cartService = inject(CartService);
 
-  // cart es una señal que retorna un Map<string,Product>
-  cart = this.cartService.products;
+  cart = this.cartService.productos;
+  totalPrice = this.cartService.total;
   cartVisibility = this.cartService.cartVisibility;
 
   // Convertimos los valores del Map en un array de productos.
