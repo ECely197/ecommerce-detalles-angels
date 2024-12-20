@@ -1,4 +1,4 @@
-import { Component, Input, inject, Signal, signal } from '@angular/core';
+import { Component, Input, inject, Signal, signal, computed } from '@angular/core';
 import { CommonModule, CurrencyPipe } from '@angular/common';
 import { CartService } from '../../services/cart.service';
 import { CartProductComponent } from '../cart-product/cart-product.component';
@@ -17,7 +17,7 @@ import { CartProductComponent } from '../cart-product/cart-product.component';
 export class CartComponent {
   private cartService = inject(CartService);
 
-  cart = this.cartService.productos;
+  cart = this.cartService.products;
   cartVisibility = this.cartService.cartVisibility;
 
   // Convertimos los valores del Map en un array de productos.

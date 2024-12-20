@@ -1,5 +1,7 @@
 <main>
-  <section class="hero"></section>
+  <div class="parent-container">
+    <section class="hero"></section>
+</div>
   <section class="product-list">
     <article *ngFor="let product of products(); trackBy: trackByProductId" class="product">
       <a [routerLink]="['/products/', product._id]">

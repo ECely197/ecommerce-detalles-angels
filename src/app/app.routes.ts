@@ -8,6 +8,7 @@ import { CheckoutComponent } from './pages/checkout/checkout.component';
 import { ThanksComponent } from './pages/thanks/thanks.component';
 import { ProductComponent } from './pages/producto/producto.component';
 import { isLoggedGuard } from './guards/is-logged.guard';
+import {} from './pages/checkout/checkout.component';
 
 export const routes: Routes = [
   { path: '', component: HomeComponent },
@@ -29,4 +30,5 @@ export const routes: Routes = [
   },
   { path: 'thanks', component: ThanksComponent },
   { path: 'products/:id', component: ProductComponent },
+
 ];

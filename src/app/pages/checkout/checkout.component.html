@@ -1,38 +1,38 @@
-<main>
+<main class="checkout-page">
+  <!-- Payment Form -->
   <section class="payment">
     <h2>Detalles del pago</h2>
-    <form action="" (submit)="onSubmit()" [formGroup]="paymentDetails">
+    <form (submit)="onSubmit()" [formGroup]="paymentForm">
       <div class="formGroup">
-        <label for="dato1">Dato 1</label>
-        <input type="text" name="dato1" id="dato1" formControlName="dato1" />
+        <label for="fullName">Nombre Completo</label>
+        <input id="fullName" type="text" formControlName="fullName" />
       </div>
       <div class="formGroup">
-        <label for="dato2">Dato 2</label>
-        <input type="text" name="dato2" id="dato2" formControlName="dato2" />
+        <label for="email">Correo Electrónico</label>
+        <input id="email" type="email" formControlName="email" />
       </div>
       <div class="formGroup">
-        <label for="dato3">Dato 3</label>
-        <input type="text" name="dato3" id="dato3" formControlName="dato3" />
+        <label for="address">Dirección</label>
+        <input id="address" type="text" formControlName="address" />
       </div>
       <div class="formGroup">
-        <label for="paymentMethod">Dato 1</label>
-        <select
-          name="paymentMethod"
-          id="paymentMethod"
-          formControlName="paymentMethod"
-        >
+        <label for="paymentMethod">Método de Pago</label>
+        <select id="paymentMethod" formControlName="paymentMethod">
+          <option value="credit-card">Tarjeta de Crédito</option>
           <option value="paypal">PayPal</option>
-          <option value="credit-card">Tarjeta de crédito</option>
         </select>
       </div>
-      <button type="submit">Realizar compra</button>
+      <button type="submit" [disabled]="paymentForm.invalid">Realizar compra</button>
     </form>
   </section>
+
+  <!-- Cart Summary -->
   <section class="cart">
     <h2>Carrito</h2>
-
-    @for(product of products().values(); track product._id) {
-    <cart-product [product]="product" />
-    }
+    <ul>
+      <li *ngFor="let product of cart()">
+        <cart-product [product]="product"></cart-product>
+      </li>
+    </ul>
   </section>
 </main>

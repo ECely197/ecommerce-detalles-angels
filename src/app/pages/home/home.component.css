@@ -1,6 +1,13 @@
+
+.parent-container {
+    display: grid;
+    place-items: center; /* Centers both horizontally and vertically */
+}
+
 section.hero {
     height: 300px;
-    background-image: url("/assets/hero.jpg");
+    width: 80%;
+    background-image: url("/assets/merry.jpg");
     background-size: cover;
     background-position: center;
 }

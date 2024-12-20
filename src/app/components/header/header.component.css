@@ -23,8 +23,8 @@ nav {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  background-color: #f5f6f3;
-  padding: 25px;
+  background-color: white;
+  padding: 35px;
   width: 100%; 
   margin: 0 auto;
 }
@@ -40,6 +40,10 @@ nav {
 
 .logo-img {
   width: 200px;
+  margin: 0 auto;
+  margin-top: auto;
+  margin-bottom: auto;
+
 }
 
 .logo-nav-compact {
