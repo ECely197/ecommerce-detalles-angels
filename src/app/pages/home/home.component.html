@@ -1,7 +1,10 @@
 <main>
+  <!-- Hero Section -->
   <div class="parent-container">
     <section class="hero"></section>
-</div>
+  </div>
+
+  <!-- Product List -->
   <section class="product-list">
     <article *ngFor="let product of products(); trackBy: trackByProductId" class="product">
       <a [routerLink]="['/products/', product._id]">
@@ -18,5 +21,7 @@
       </button>
     </article>
   </section>
+
+  <!-- Featured Product -->
   <app-producto-destacado></app-producto-destacado>
 </main>

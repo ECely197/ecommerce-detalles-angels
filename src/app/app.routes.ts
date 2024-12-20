@@ -7,8 +7,9 @@ import { HomeComponent } from './pages/home/home.component';
 import { CheckoutComponent } from './pages/checkout/checkout.component';
 import { ThanksComponent } from './pages/thanks/thanks.component';
 import { ProductComponent } from './pages/producto/producto.component';
+import { ContactComponent } from './pages/contact/contact.component';
+import { AboutComponent } from './pages/about/about.component';
 import { isLoggedGuard } from './guards/is-logged.guard';
-import {} from './pages/checkout/checkout.component';
 
 export const routes: Routes = [
   { path: '', component: HomeComponent },
@@ -30,5 +31,6 @@ export const routes: Routes = [
   },
   { path: 'thanks', component: ThanksComponent },
   { path: 'products/:id', component: ProductComponent },
-
+  { path: 'contact', component: ContactComponent }, // Added Contact Us route
+  { path: 'about', component: AboutComponent }, // Added About Us route
 ];

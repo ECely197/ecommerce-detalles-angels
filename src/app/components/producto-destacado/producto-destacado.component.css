@@ -50,6 +50,13 @@
   color: #007bff; /* Color azul para el título */
 }
 
+h2 {
+  display: grid;
+  align-items: center;
+  text-align: center;
+  margin: 10px;
+}
+
 .product-card p {
   font-size: 16px; /* Tamaño del texto del precio */
   color: #555; /* Color gris para el precio */
@@ -57,6 +64,7 @@
 
 .navigation {
   margin-top: 30px; /* Espacio arriba de los botones */
+  margin-bottom: 30px;
   display: flex;
   justify-content: center; /* Centrar los botones */
   gap: 20px; /* Espacio entre botones */

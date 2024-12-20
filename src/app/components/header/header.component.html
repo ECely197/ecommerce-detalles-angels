@@ -1,20 +1,19 @@
 <header>
-  <span class="overlay" id="overlay"> </span>
+  <span class="overlay" id="overlay"></span>
   <div id="container-header-nav">
     <div class="logo">
-      <a href="#"
-        ><img src="assets/images/logo-long-da.svg" alt="Logo" class="logo-img"
-      /></a>
+      <a href="#">
+        <img src="assets/images/logo-long-da.svg" alt="Logo" class="logo-img" />
+      </a>
     </div>
     <nav role="navigation" id="nav-sticky">
       <div class="container-center">
-        <button
-          class="open-nav"
-          id="open"
-          aria-label="Abrir menú de navegación"
-        >
+        <!-- Botón de menú para móviles -->
+        <button class="open-nav" id="open" aria-label="Abrir menú de navegación">
           <i class="bi bi-list"></i>
         </button>
+
+        <!-- Lista de navegación -->
         <div class="nav-hamburguer" id="nav">
           <button
             class="close-menu"
@@ -24,81 +23,42 @@
             <i class="bi bi-x"></i>
           </button>
           <ul class="nav-list">
-            <li class="dropdown">
-              <a href="#" aria-haspopup="true" aria-expanded="false"
-                >Productos</a
-              >
-            </li>
+            <li><a routerLink="/">Inicio</a></li>
+            <li><a routerLink="/products">Productos</a></li>
+            <li><a routerLink="/about">Sobre Nosotros</a></li>
+            <li><a routerLink="/contact">Contacto</a></li>
           </ul>
+          
         </div>
-        <div class="logo-nav-compact">
-          <a routerLink="/">
-            <img
-              src="assets/images/merrymerry.jpg"
-              alt="Logo"
-              class="logo-img"
-            />
-          </a>
-        </div>
+
+        <!-- Íconos y perfil de usuario -->
         <div class="icons-icon-svg">
           <button (click)="handleCartClick()" aria-label="Carrito de compras">
             <img
               src="assets/images/cart-shopping.svg"
               class="icon-header"
-              alt="Icono de carrito de compras"
+              alt="Carrito de compras"
             />
           </button>
-          <a *ngIf="!isLogged()" routerLink="/login" aria-label="Iniciar sesión"
-            >login</a
-          >
-          <a *ngIf="!isLogged()" routerLink="/register" aria-label="Registrarse"
-            >register</a
-          >
+          <a *ngIf="!isLogged()" routerLink="/login">Login</a>
+          <a *ngIf="!isLogged()" routerLink="/register">Register</a>
           <div *ngIf="isLogged()" class="user-profile" (click)="toggleMenu()">
-            <div aria-label="Perfil de Usuario" class="user-info">
+            <div class="user-info">
               <img
-                [src]="
-                  userProfile?.avatar
-                    ? '' + userProfile?.avatar
-                    : '/default-avatar.png'
-                "
-                alt="Avatar del Usuario"
+                [src]="userProfile?.avatar || '/default-avatar.png'"
+                alt="Avatar"
                 class="user-avatar"
               />
-              <p>
-                {{
-                  (userProfile?.firstname || "") +
-                    " " +
-                    (userProfile?.lastname || "") || "Usuario"
-                }}
-              </p>
+              <p>{{ userProfile?.firstname || 'Usuario' }}</p>
             </div>
-            <div [ngClass]="{ 'dropdown-menu': true, hidden: !menuVisible }">
-              <div class="user-info">
-                <img
-                  [src]="
-                    userProfile?.avatar
-                      ? '' + userProfile?.avatar
-                      : '/default-avatar.png'
-                  "
-                  alt="Avatar del Usuario"
-                  class="user-avatar"
-                />
-                <p>
-                  {{
-                    (userProfile?.firstname || "") +
-                      " " +
-                      (userProfile?.lastname || "") || "Usuario"
-                  }}
-                </p>
-              </div>
-              <button
-                (click)="logout()"
-                aria-label="Cerrar sesión"
-                class="logout-btn"
-              >
-                Cerrar sesión
-              </button>
+            <div
+              [ngClass]="{
+                'dropdown-menu': true,
+                active: menuVisible
+              }"
+            >
+              <a href="#">Mi Perfil</a>
+              <a (click)="logout()">Cerrar sesión</a>
             </div>
           </div>
         </div>

@@ -1,123 +1,126 @@
 /* General Page Styles */
 main {
-  background: linear-gradient(135deg, #007bff 30%, #6c757d 100%);
-  padding: 60px 20px;
-  min-height: 100vh; /* Ensure the page covers full height */
+  background: linear-gradient(to bottom, #1d2671, #c33764); /* Modern gradient */
+  min-height: 100vh;
   display: flex;
   justify-content: center;
   align-items: center;
-}
-
-/* Login Container */
-#login {
-  background-color: #ffffff;
-  border-radius: 16px;
-  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.2); /* Softer shadow */
-  padding: 40px;
-  max-width: 450px;
-  width: 100%;
-  text-align: center; /* Center align content */
-  animation: fadeIn 0.8s ease-in-out; /* Add fade-in effect */
-}
-
-/* Title and Subtitle */
-h2 {
-  font-size: 28px;
-  color: #333;
-  margin-bottom: 15px;
+  padding: 20px;
   font-family: 'Poppins', sans-serif; /* Modern font */
 }
 
-p {
-  font-size: 16px;
-  color: #666;
+/* Login Section */
+#login {
+  background-color: rgba(255, 255, 255, 0.95); /* Slight transparency for aesthetics */
+  border-radius: 20px; /* Softer corners */
+  box-shadow: 0 12px 35px rgba(0, 0, 0, 0.2); /* Softer shadow */
+  padding: 50px;
+  max-width: 600px; /* Increased width for spacious look */
+  width: 100%;
+  animation: fadeIn 0.8s ease-in-out; /* Smooth fade-in effect */
+}
+
+/* Title Styling */
+.section-text-combo h2 {
+  font-size: 32px;
+  color: #333;
   margin-bottom: 20px;
-  line-height: 1.5;
+  font-weight: bold;
+  text-align: center;
 }
 
-/* Form Styling */
-form {
-  text-align: left;
-}
-
-.form-label {
-  font-weight: 600;
-  color: #495057;
-  margin-bottom: 8px;
-}
-
+/* Input Fields */
 .form-control {
-  border: 1px solid #ced4da;
-  border-radius: 8px;
-  padding: 12px;
+  border: 2px solid #ddd;
+  border-radius: 12px; /* Rounded edges */
+  padding: 15px;
   transition: border-color 0.3s, box-shadow 0.3s;
+  font-size: 16px;
 }
 
 .form-control:focus {
-  border-color: #007bff;
-  box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
+  border-color: #ff758c; /* Highlight color */
+  box-shadow: 0 0 10px rgba(255, 117, 140, 0.5);
   outline: none;
 }
 
-/* Button Styles */
+/* Password Visibility Button */
+.position-relative button {
+  background: none;
+  border: none;
+  color: #ff758c;
+  cursor: pointer;
+  font-size: 18px;
+}
+
+.position-relative button:hover {
+  color: #ff5470;
+}
+
+/* Error Message */
+.alert-danger {
+  color: #721c24;
+  background-color: #f8d7da;
+  border-color: #f5c6cb;
+  font-size: 14px;
+  border-radius: 8px;
+  padding: 10px;
+}
+
+/* Submit Button */
 .btn-primary {
-  background-color: #007bff;
+  background-color: #ff758c; /* Gradient button */
   border: none;
   color: white;
-  padding: 12px 20px;
-  border-radius: 8px;
-  font-weight: 600;
-  transition: background-color 0.3s ease, transform 0.2s ease;
+  padding: 15px;
+  border-radius: 12px;
+  font-weight: bold;
+  font-size: 18px;
+  transition: background-color 0.3s, transform 0.2s ease;
   width: 100%;
-}
-
-.btn-primary:hover {
-  background-color: #0056b3;
-  transform: scale(1.02); /* Slight scaling effect */
-}
-
-/* Additional Links */
-p {
-  text-align: center;
   margin-top: 20px;
 }
 
-a {
-  color: #007bff;
-  text-decoration: none;
-  font-weight: 600;
+.btn-primary:hover {
+  background-color: #ff5470;
+  transform: scale(1.02);
 }
 
-a:hover {
+/* Registration Link */
+.mt-3 p {
+  text-align: center;
+  font-size: 14px;
+  color: #666;
+  margin-top: 15px;
+}
+
+.mt-3 a {
+  color: #ff758c;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+.mt-3 a:hover {
   text-decoration: underline;
 }
 
-/* Responsive Styles */
+/* Responsive Design */
 @media screen and (max-width: 768px) {
   #login {
     padding: 30px;
   }
 
-  h2 {
-    font-size: 24px;
-  }
-}
-
-@media screen and (max-width: 576px) {
-  #login {
-    padding: 20px;
-  }
-
-  h2 {
-    font-size: 22px;
+  .section-text-combo h2 {
+    font-size: 26px;
   }
 
   .btn-primary {
-    padding: 10px 18px;
+    padding: 12px;
+    font-size: 16px;
   }
 }
 
-/* Animation */
+/* Fade-In Animation */
 @keyframes fadeIn {
   from {
     opacity: 0;

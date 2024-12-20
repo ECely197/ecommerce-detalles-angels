@@ -1,93 +1,120 @@
-/* ====================
-- General styles
-==================== */
-
+/* General Styles */
 main {
-  min-height: 80vh;
-  margin-top: 54px;
+  background: linear-gradient(to bottom, #1d2671, #c33764); /* Gradient background */
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
+  font-family: 'Poppins', sans-serif; /* Modern font */
 }
 
-.section-text-combo {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
+#login {
+  background-color: rgba(255, 255, 255, 0.95); /* Light, slightly transparent background */
+  border-radius: 20px; /* Rounded edges for modern look */
+  box-shadow: 0 12px 35px rgba(0, 0, 0, 0.2); /* Softer shadow effect */
+  padding: 50px;
+  max-width: 600px; /* Wider for better spacing */
+  width: 100%;
+  animation: fadeIn 0.8s ease-in-out; /* Smooth fade-in animation */
+}
+
+.section-text-combo h2 {
+  font-size: 32px;
+  color: #333; /* Dark text color for contrast */
+  margin-bottom: 15px;
+  font-weight: bold;
   text-align: center;
-  margin-bottom: 1rem;
 }
 
 .section-text-combo p {
-  width: 70%;
-  font-size: 0.9rem;
-  line-height: 1.2rem;
+  font-size: 14px;
+  color: #666;
+  margin-bottom: 30px;
+  text-align: center;
+  line-height: 1.6;
 }
 
-/* ====================
-      - Login Section
-      ==================== */
-
-form {
+/* Form Fields */
+.form-control {
+  border: 2px solid #ddd;
+  border-radius: 12px;
+  padding: 15px;
+  transition: border-color 0.3s, box-shadow 0.3s;
+  font-size: 16px;
 }
 
+.form-control:focus {
+  border-color: #ff758c; /* Focus color for inputs */
+  box-shadow: 0 0 10px rgba(255, 117, 140, 0.5);
+  outline: none;
+}
+
+/* Error Styling */
 form small.error {
-  color: red;
+  color: #ff0000;
+  font-size: 12px;
 }
 
-/* ====================
-      - Footer section
-      ==================== */
-
-footer {
-  background-color: #212529;
+/* Buttons */
+.btn-primary {
+  background-color: #ff758c;
+  border: none;
   color: white;
+  padding: 15px;
+  border-radius: 12px;
+  font-weight: bold;
+  font-size: 16px;
+  transition: background-color 0.3s, transform 0.2s ease;
+  width: 100%;
+  margin-top: 20px;
 }
 
-footer ul {
-  list-style-type: none;
-  padding: 0;
+.btn-primary:hover {
+  background-color: #ff5470;
+  transform: scale(1.02); /* Slight zoom effect */
 }
 
-footer ul li {
-  color: #888;
-  font-size: 0.9rem;
+.btn {
+  background-color: #ddd;
+  color: #555;
+  padding: 15px;
+  border-radius: 12px;
+  font-size: 16px;
+  margin-top: 20px;
+  width: 100%;
+  border: none;
 }
 
-footer ul li.list-title {
-  padding-bottom: 1rem;
-  color: white;
-  text-transform: uppercase;
-  letter-spacing: 0.2rem;
+.btn:hover {
+  background-color: #ccc;
+  color: #333;
 }
 
-footer .copyright {
-  font-size: 0.9rem;
-  color: #888;
-}
-
-/* ====================
-        - Media queries
-        
-          xs   <  576px
-          sm   ≥  576px
-          md   ≥  768px
-          lg   ≥  992px
-          xl   ≥  1200px
-          xxl  ≥  1400px
-        ==================== */
-
-@media screen and (max-width: 992px) {
-}
-
+/* Responsive Design */
 @media screen and (max-width: 768px) {
-  .section-text-combo p {
-    width: 80%;
+  #login {
+    padding: 30px;
+  }
+
+  .section-text-combo h2 {
+    font-size: 26px;
+  }
+
+  .btn-primary {
+    padding: 12px;
+    font-size: 14px;
   }
 }
 
-@media screen and (max-width: 576px) {
-  html {
-    font-size: 18px;
+/* Fade-In Animation */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-20px);
   }
-  .section-text-combo p {
-    width: 100%;
+  to {
+    opacity: 1;
+    transform: translateY(0);
   }
 }

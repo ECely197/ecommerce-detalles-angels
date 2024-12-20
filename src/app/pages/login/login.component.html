@@ -1,42 +1,51 @@
 <main>
   <section id="login">
-    <div class="container py-5">
-      <div class="row">
-        <div class="col-12 col-sm-10 col-md-8 col-lg-6 offset-sm-1 offset-md-2 offset-lg-3">
-          <div class="section-text-combo">
-            <h2>Iniciar sesión</h2>
-          </div>
-          <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
-            <div class="mb-3">
-              <label for="exampleInputEmail1" class="form-label">Email</label>
-              <input type="email" class="form-control" formControlName="email" />
-            </div>
-            <div class="mb-3 position-relative">
-              <label for="exampleInputPassword1" class="form-label">Contraseña</label>
-              <input 
-                type="password" 
-                class="form-control" 
-                formControlName="password" 
-                [type]="showPassword ? 'text' : 'password'"
-              />
-              <button type="button" (click)="togglePasswordVisibility()" class="position-absolute end-0 top-0 mt-2 me-3">
-                <i [ngClass]="showPassword ? 'bi bi-eye-slash' : 'bi bi-eye'"></i>
-              </button>
-            </div>
-
-            <!-- Mostrar mensaje de error -->
-            <div *ngIf="errorMessage" class="alert alert-danger">
-              {{ errorMessage }}
-            </div>
-              
-            <button type="submit" class="btn btn-primary">Iniciar sesión</button>
-          </form>
-
-          <!-- Enlace para registrarse -->
-          <div class="mt-3">
-            <p>¿No tienes una cuenta? <a [routerLink]="['/register']">Regístrate aquí</a></p>
-          </div>
+    <div class="container">
+      <div class="section-text-combo">
+        <h2>Iniciar sesión</h2>
+      </div>
+      <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+        <!-- Email Field -->
+        <div class="mb-3">
+          <label for="exampleInputEmail1" class="form-label">Email</label>
+          <input 
+            type="email" 
+            class="form-control" 
+            formControlName="email" 
+            placeholder="Introduce tu email" 
+          />
         </div>
+
+        <!-- Password Field -->
+        <div class="mb-3 position-relative">
+          <label for="exampleInputPassword1" class="form-label">Contraseña</label>
+          <input 
+            type="password" 
+            class="form-control" 
+            formControlName="password" 
+            [type]="showPassword ? 'text' : 'password'" 
+            placeholder="Introduce tu contraseña" 
+          />
+          <button 
+            type="button" 
+            (click)="togglePasswordVisibility()" 
+            class="position-absolute end-0 top-0 mt-2 me-3">
+            <i [ngClass]="showPassword ? 'bi bi-eye-slash' : 'bi bi-eye'"></i>
+          </button>
+        </div>
+
+        <!-- Error Message -->
+        <div *ngIf="errorMessage" class="alert alert-danger">
+          {{ errorMessage }}
+        </div>
+
+        <!-- Submit Button -->
+        <button type="submit" class="btn btn-primary">Iniciar sesión</button>
+      </form>
+
+      <!-- Registration Link -->
+      <div class="mt-3">
+        <p>¿No tienes una cuenta? <a [routerLink]="['/register']">Regístrate aquí</a></p>
       </div>
     </div>
   </section>

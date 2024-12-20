@@ -1,75 +1,73 @@
 <main>
   <section id="login">
-    <div class="container py-5">
-      <div class="row">
-        <div
-          class="col-12 col-sm-10 col-md-8 col-lg-6 offset-sm-1 offset-md-2 offset-lg-3"
-        >
-          <div class="section-text-combo">
-            <h2>Ad lorem ipsum</h2>
-            <p>
-              Lorem ipsum dolor sit, amet consectetur adipisicing elit. Corrupti
-              accusantium voluptas voluptatibus perferendis velit nostrum qui
-              repellendus laboriosam.
-            </p>
-          </div>
-          <form
-            [formGroup]="registerForm"
-            (submit)="onSubmit()"
-            enctype="multipart/form-data"
-          >
-            <div class="mb-3">
-              <label for="firstname" class="form-label">Firstname</label>
-              <input
-                type="text"
-                class="form-control"
-                id="firstname"
-                formControlName="firstname"
-              />
-            </div>
-            <div class="mb-3">
-              <label for="lastname" class="form-label">Lastname</label>
-              <input
-                type="text"
-                class="form-control"
-                id="lastname"
-                formControlName="lastname"
-              />
-            </div>
-            <div class="mb-3">
-              <label for="email" class="form-label">Email</label>
-              <input
-                type="email"
-                class="form-control"
-                id="email"
-                formControlName="email"
-              />
-            </div>
-            <div class="mb-3">
-              <label for="avatar" class="form-label">Avatar</label>
-              <input
-                type="file"
-                class="form-control"
-                id="avatar"
-                formControlName="avatar"
-                (change)="onFileChange($event)"
-              />
-            </div>
-            <div class="mb-3">
-              <label for="password" class="form-label">Password</label>
-              <input
-                type="password"
-                class="form-control"
-                id="password"
-                formControlName="password"
-              />
-            </div>
-
-            <button type="submit" class="btn btn-primary">Register</button>
-            <button type="button" class="btn">Cancel</button>
-          </form>
-        </div>
+    <div class="container">
+      <div class="section-text-combo">
+        <h2>Crear una cuenta</h2>
+        <p>
+          Únete a nuestra comunidad. Regístrate con tu información y comienza a
+          disfrutar de nuestras ofertas exclusivas.
+        </p>
       </div>
+      <form
+        [formGroup]="registerForm"
+        (submit)="onSubmit()"
+        enctype="multipart/form-data"
+      >
+        <div class="mb-3">
+          <label for="firstname" class="form-label">Nombre</label>
+          <input
+            type="text"
+            class="form-control"
+            id="firstname"
+            formControlName="firstname"
+            placeholder="Introduce tu nombre"
+          />
+        </div>
+        <div class="mb-3">
+          <label for="lastname" class="form-label">Apellido</label>
+          <input
+            type="text"
+            class="form-control"
+            id="lastname"
+            formControlName="lastname"
+            placeholder="Introduce tu apellido"
+          />
+        </div>
+        <div class="mb-3">
+          <label for="email" class="form-label">Email</label>
+          <input
+            type="email"
+            class="form-control"
+            id="email"
+            formControlName="email"
+            placeholder="Introduce tu email"
+          />
+        </div>
+        <div class="mb-3">
+          <label for="avatar" class="form-label">Avatar</label>
+          <input
+            type="file"
+            class="form-control"
+            id="avatar"
+            formControlName="avatar"
+            (change)="onFileChange($event)"
+          />
+        </div>
+        <div class="mb-3">
+          <label for="password" class="form-label">Contraseña</label>
+          <input
+            type="password"
+            class="form-control"
+            id="password"
+            formControlName="password"
+            placeholder="Introduce tu contraseña"
+          />
+        </div>
+
+        <!-- Submit and Cancel Buttons -->
+        <button type="submit" class="btn btn-primary">Registrarse</button>
+        <button type="button" class="btn">Cancelar</button>
+      </form>
     </div>
   </section>
 </main>
