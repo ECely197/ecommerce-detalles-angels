@@ -8,8 +8,7 @@ import { Producto} from '../models/product.model';
   providedIn: 'root'
 })
 export class ProductoService {
-  private apiUrl = 'http://localhost:3000/api/products'; // Cambia esto según tu configuración
-
+  protected apiUrl = 'http://localhost:3000/api/products'; 
 
   constructor(private http: HttpClient) {}
 
@@ -43,9 +42,7 @@ export class ProductoService {
       );
   }
 
- 
-
-list() {
-  return this.http.get("http://localhost:3000/api/products")
-}
+  list() {
+    return this.http.get("http://localhost:3000/api/products")
+  }
 }

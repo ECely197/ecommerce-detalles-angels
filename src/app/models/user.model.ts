@@ -5,18 +5,18 @@ export interface User {
     lastname: string,
     email: string,
     password: string,
-    avatar?: string, // Propiedad opcional
+    avatar?: string, 
 }
 export interface RegisterData {
     email: string;
     password: string;
-    firstname: string; // Cambiado a obligatorio
-    lastname: string;  // Cambiado a obligatorio
+    firstname: string; 
+    lastname: string;  
   }
   
   export interface RegisterResponse {
-    user: User; // Asegúrate de que esto esté correcto
-    token: string; // Agrega esta línea
+    user: User; 
+    token: string; 
   }
   
   export interface LoginResponse {
