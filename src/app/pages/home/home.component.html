@@ -1,25 +1,20 @@
 <main>
   <section class="hero"></section>
-  <section class="hero"></section>
-  <section class="hero"></section>
-  <section class="hero"></section>
   <section class="product-list">
-    @for(product of products(); track product._id) {
-    <article class="product">
+    <article *ngFor="let product of products(); trackBy: trackByProductId" class="product">
       <a [routerLink]="['/products/', product._id]">
         <figure>
-          <img [src]="product.images" [alt]="product.nombre" />
+          <img [src]="product.images[0]" [alt]="product.nombre" />
           <figcaption>
             <h2>{{ product.nombre }}</h2>
             <h3>{{ product.precio | currency }}</h3>
           </figcaption>
         </figure>
       </a>
-      <button class="add-cart" (click)="addToCart(products)">
+      <button class="add-cart" (click)="addToCart(product)">
         Agregar al carrito
       </button>
     </article>
-    }
   </section>
   <app-producto-destacado></app-producto-destacado>
 </main>

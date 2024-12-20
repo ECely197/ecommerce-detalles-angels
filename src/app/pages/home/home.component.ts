@@ -1,4 +1,5 @@
 import { Component, inject, signal } from '@angular/core';
+import { CommonModule } from '@angular/common';
 import { HeaderComponent } from '../../components/header/header.component';
 import { Producto } from '../../models/product.model';
 import { ProductoService } from '../../services/product.service';
@@ -10,33 +11,41 @@ import { ProductoDestacadoComponent } from '../../components/producto-destacado/
 @Component({
   selector: 'app-home',
   standalone: true,
-  imports: [HeaderComponent, RouterLinkWithHref, CurrencyPipe, ProductoDestacadoComponent],
+  imports: [
+    CommonModule,
+    HeaderComponent,
+    RouterLinkWithHref,
+    CurrencyPipe,
+    ProductoDestacadoComponent
+  ],
   templateUrl: './home.component.html',
-  styleUrl: './home.component.css'
+  styleUrls: ['./home.component.css']
 })
 export class HomeComponent {
-  private productService = inject(ProductoService)
-  private cartService = inject(CartService)
+  private productService = inject(ProductoService);
+  private cartService = inject(CartService);
 
-  products = signal<Producto[]>([])
+  products = signal<Producto[]>([]);
 
   ngOnInit() {
     this.productService.list()
       .subscribe({
         next: (response: any) => {
-          this.products.set(response)
+          this.products.set(response);
         },
         error: error => {
-          console.log(error)
+          console.log(error);
         }
-      })
+      });
   }
 
-  addToCart(product: any) {
-    this.cartService.addToCart(product)
+  addToCart(product: Producto) {
+    this.cartService.addToCart(product);
   }
 
-  removeFromCart() {
+  removeFromCart() {}
 
+  trackByProductId(index: number, product: Producto): string {
+    return product._id ?? 'default-id';
   }
 }

@@ -1,5 +1,5 @@
 <aside [ngClass]="cartVisibility() ? 'cart show' : 'cart'">
-  <h2>Carrito ({{ cart().size }})</h2>
+  <h2>Carrito ({{ totalQuantity() }})</h2>
   <button class="close" (click)="handleCartClick()">Close</button>
   <section class="cart-products">
     @for(product of cart().values(); track product._id) {
